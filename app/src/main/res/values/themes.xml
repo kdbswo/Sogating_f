@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Sogating_f" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/mainColor</item>
+    </style>
+
+    <style name="Theme.Sogating_f" parent="Base.Theme.Sogating_f" />
+</resources>
