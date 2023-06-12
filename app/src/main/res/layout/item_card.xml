@@ -18,6 +18,7 @@
             android:src="@drawable/no" />
 
         <TextView
+            android:id="@+id/itemNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -27,6 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/itemAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Age"
@@ -35,6 +37,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/itemCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="City"
