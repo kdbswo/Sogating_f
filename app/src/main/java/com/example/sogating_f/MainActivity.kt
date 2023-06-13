@@ -6,16 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import com.example.sogating_f.auth.IntroActivity
 import com.example.sogating_f.auth.UserDataModel
+import com.example.sogating_f.setting.SettingActivity
 import com.example.sogating_f.slider.CardStackAdapter
-import com.example.sogating_f.utils.FirebaseAuthUtils
 import com.example.sogating_f.utils.FirebaseRef
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.CardStackView
@@ -37,10 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         setting.setOnClickListener {
 
-            val auth = Firebase.auth
-            auth.signOut()
-
-            val intent = Intent(this, IntroActivity::class.java)
+            val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
 
         }
@@ -95,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
                     val user = dataModel.getValue(UserDataModel::class.java)
                     userDataList.add(user!!)
-                    Log.d(TAG, user?.nickname.toString())
+                    Log.d(TAG, user.nickname.toString())
                 }
                 cardStackAdapter.notifyDataSetChanged()
             }
