@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private val uid = FirebaseAuthUtils.getUid()
 
-    private lateinit var currentUserGender : String
+    private lateinit var currentUserGender: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
 
                 if (direction == Direction.Right) {
                     Toast.makeText(this@MainActivity, "right", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, userDataList[userCount].uid.toString())
+
+                    userLikeOtherUser(uid, userDataList[userCount].uid.toString())
                 }
                 if (direction == Direction.Left) {
                     Toast.makeText(this@MainActivity, "left", Toast.LENGTH_SHORT).show()
@@ -152,6 +155,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         FirebaseRef.userInfoRef.addValueEventListener(postListener)
+    }
+
+    private fun userLikeOtherUser(myUid: String, otherUid: String) {
+        FirebaseRef.userLikeRef.child(myUid).child(otherUid).setValue(true)
+
     }
 
 }

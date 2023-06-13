@@ -71,8 +71,6 @@ class JoinActivity : AppCompatActivity() {
             nickname = findViewById<TextInputEditText>(R.id.nicknameArea).text.toString()
 
 
-
-
             auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
