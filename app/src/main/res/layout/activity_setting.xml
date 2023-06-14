@@ -14,6 +14,12 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/myLikeList"
+        android:text="MY Matching LIST"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
         android:id="@+id/logoutBtn"
         android:text="Logout"
         android:layout_width="match_parent"
