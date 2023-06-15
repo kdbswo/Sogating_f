@@ -7,7 +7,9 @@ import android.os.Handler
 import android.util.Log
 import com.example.sogating_f.auth.IntroActivity
 import com.example.sogating_f.utils.FirebaseAuthUtils
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 
 class SplashActivity : AppCompatActivity() {
 
@@ -18,9 +20,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-//        Log.d(TAG, auth.currentUser?.uid.toString())
-
-//        val uid = auth.currentUser?.uid.toString()
         val uid = FirebaseAuthUtils.getUid()
         if (uid == "null"){
             Handler().postDelayed({

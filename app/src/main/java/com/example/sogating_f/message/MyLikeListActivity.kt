@@ -35,7 +35,6 @@ class MyLikeListActivity : AppCompatActivity() {
         getMyLikeList()
 
         userListView.setOnItemClickListener { parent, view, position, id ->
-//            Log.d(TAG, likeUserList[position].uid.toString())
             checkMatching(likeUserList[position].uid.toString())
 
         }
