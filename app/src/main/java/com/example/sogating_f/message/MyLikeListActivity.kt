@@ -33,7 +33,47 @@ class MyLikeListActivity : AppCompatActivity() {
         userListView.adapter = listViewAdapter
 
         getMyLikeList()
-        getUserDataList()
+
+        userListView.setOnItemClickListener { parent, view, position, id ->
+//            Log.d(TAG, likeUserList[position].uid.toString())
+            checkMatching(likeUserList[position].uid.toString())
+
+        }
+    }
+
+    private fun checkMatching(otherUid: String) {
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                if (dataSnapshot.children.count() == 0) {
+
+                    Toast.makeText(this@MyLikeListActivity, "매칭 실패", Toast.LENGTH_SHORT)
+                        .show()
+
+                } else {
+
+                    for (dataModel in dataSnapshot.children) {
+                        val likeUserKey = dataModel.key.toString()
+                        if (likeUserKey.equals(uid)) {
+                            Toast.makeText(this@MyLikeListActivity, "매칭이 되었습니다", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            Toast.makeText(this@MyLikeListActivity, "매칭 실패", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+
+                }
+
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        FirebaseRef.userLikeRef.child(otherUid).addValueEventListener(postListener)
     }
 
     private fun getMyLikeList() {
@@ -65,8 +105,8 @@ class MyLikeListActivity : AppCompatActivity() {
                     val user = dataModel.getValue(UserDataModel::class.java)
 
                     if (likeUserListUid.contains(user?.uid)) {
-                        Log.d(TAG, user.toString())
                         likeUserList.add(user!!)
+
                     }
                 }
                 listViewAdapter.notifyDataSetChanged()
