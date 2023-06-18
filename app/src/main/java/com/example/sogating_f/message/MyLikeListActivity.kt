@@ -35,6 +35,7 @@ class MyLikeListActivity : AppCompatActivity() {
 
     lateinit var listViewAdapter: ListViewAdapter
     lateinit var getterUid: String
+    lateinit var getterToken: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +61,7 @@ class MyLikeListActivity : AppCompatActivity() {
 
             checkMatching(likeUserList[position].uid.toString())
             getterUid = likeUserList[position].uid.toString()
+            getterToken = likeUserList[position].token.toString()
             return@setOnItemLongClickListener (true)
         }
     }
@@ -169,9 +171,17 @@ class MyLikeListActivity : AppCompatActivity() {
         val btn = mAlertDialog.findViewById<Button>(R.id.sendBtnArea)
         btn?.setOnClickListener {
 
-            val mgsModel = MsgModel(MyInfo.myNickname, testArea!!.text.toString())
+            val msgText = testArea!!.text.toString()
+
+            val mgsModel = MsgModel(MyInfo.myNickname, msgText)
 
             FirebaseRef.userMsgRef.child(getterUid).push().setValue(mgsModel)
+
+            val notiModel = NotiModel(MyInfo.myNickname, msgText)
+
+            val pushModel = PushNotification(notiModel, getterToken)
+
+            testPush(pushModel)
 
             mAlertDialog.dismiss()
         }

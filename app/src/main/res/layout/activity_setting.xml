@@ -4,25 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".setting.SettingActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".setting.SettingActivity">
 
     <Button
         android:id="@+id/myPageBtn"
-        android:text="MY PAGE"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="MY PAGE" />
 
     <Button
         android:id="@+id/myLikeList"
-        android:text="MY Matching LIST"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="MY Matching LIST" />
+
+    <Button
+        android:id="@+id/myMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내가 받은 메세지" />
 
     <Button
         android:id="@+id/logoutBtn"
-        android:text="Logout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
 
 </LinearLayout>
