@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -15,6 +16,7 @@ import com.example.sogating_f.message.fcm.PushNotification
 import com.example.sogating_f.message.fcm.RetrofitInstance
 import com.example.sogating_f.utils.FirebaseAuthUtils
 import com.example.sogating_f.utils.FirebaseRef
+import com.example.sogating_f.utils.MyInfo
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -32,6 +34,8 @@ class MyLikeListActivity : AppCompatActivity() {
     private val likeUserList = mutableListOf<UserDataModel>()
 
     lateinit var listViewAdapter: ListViewAdapter
+    lateinit var getterUid: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_like_list)
@@ -55,7 +59,7 @@ class MyLikeListActivity : AppCompatActivity() {
         userListView.setOnItemLongClickListener { parent, view, position, id ->
 
             checkMatching(likeUserList[position].uid.toString())
-
+            getterUid = likeUserList[position].uid.toString()
             return@setOnItemLongClickListener (true)
         }
     }
@@ -160,9 +164,15 @@ class MyLikeListActivity : AppCompatActivity() {
             .setTitle("메세지 보내기")
 
         val mAlertDialog = mBuilder.show()
+        val testArea = mAlertDialog.findViewById<EditText>(R.id.sendTextArea)
 
         val btn = mAlertDialog.findViewById<Button>(R.id.sendBtnArea)
-        btn?.setOnClickListener{
+        btn?.setOnClickListener {
+
+            val mgsModel = MsgModel(MyInfo.myNickname, testArea!!.text.toString())
+
+            FirebaseRef.userMsgRef.child(getterUid).push().setValue(mgsModel)
+
             mAlertDialog.dismiss()
         }
     }

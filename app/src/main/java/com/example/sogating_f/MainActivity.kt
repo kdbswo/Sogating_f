@@ -23,6 +23,7 @@ import com.example.sogating_f.setting.SettingActivity
 import com.example.sogating_f.slider.CardStackAdapter
 import com.example.sogating_f.utils.FirebaseAuthUtils
 import com.example.sogating_f.utils.FirebaseRef
+import com.example.sogating_f.utils.MyInfo
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -122,6 +123,8 @@ class MainActivity : AppCompatActivity() {
                 Log.w(TAG, data?.gender.toString())
 
                 currentUserGender = data?.gender.toString()
+
+                MyInfo.myNickname = data?.nickname.toString()
 
                 getUserDataList(currentUserGender)
 
