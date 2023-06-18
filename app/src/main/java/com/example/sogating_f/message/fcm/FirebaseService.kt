@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -25,10 +24,14 @@ class FirebaseService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        Log.d(TAG, message.notification?.title.toString())
-        Log.d(TAG, message.notification?.body.toString())
-        val title = message.notification?.title.toString()
-        val body = message.notification?.body.toString()
+//        Log.d(TAG, message.notification?.title.toString())
+//        Log.d(TAG, message.notification?.body.toString())
+//        val title = message.notification?.title.toString()
+//        val body = message.notification?.body.toString()
+
+        val title = message.data["title"].toString()
+        val body = message.data["content"].toString()
+
         createNotificationChannel()
         sendNotification(title, body)
     }
